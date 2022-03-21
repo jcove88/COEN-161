@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Binary Search Tree</title>
+</head>
+<body>
+	<script type="text/javascript" src="http://students.engr.scu.edu/~adiaztostado/resources/testBst.js"></script>
+	<script>
+		// Implement a Binary Search Tree using JS Constructors and Pro
+
+		class Node{											//class for each node
+			constructor (value){			
+				this.left = null;							//left child
+				this.right = null;							//right child
+				this.value = value;							//holds the value of the node
+			}
+		}
+
+		class BinarySearchTree{								//class for the BST
+			constructor(){
+				this.root = null;							//the root is initially a null value
+			}
+			
+			
+			insert(value){									//method for inserting new node into BST
+				let newNode = new Node(value);				//create new node with the given value
+
+				if(this.root === null){						//set the new node as the root if there is none
+					this.root = newNode;					
+					return;
+				}
+				
+				let current = this.root;			
+				while(current.value !== value){					//compare values while the current is not equal to the new value
+					if(value < current.value){					//if new value is less than current value and its not null, store value in left child
+						if(current.left === null){			
+							current.left = newNode;
+							return;
+						}
+						else{
+							current = current.left;
+						}
+						
+					}
+					else{
+						if(current.right === null){	 		//new value is greater than current value which isn't null, so store value in right child
+							current.right = newNode; 		
+							return this;
+						}
+						else{
+							current = current.right;
+						}
+					}
+				}
+			}
+
+			inorder(fn){									//method for traversing the BST in order. Useful for insertion and printing the BST. 
+				let current = this.root;					//starting with the root
+				function traverse(node){					//uses traverse function which recursively goes through left subtree, processes the node, and then right subtree.
+						if(node != null){
+								traverse(node.left);
+								fn(node.value);
+								traverse(node.right);
+						}
+				}
+				traverse(current);
+			}
+			
+			search(value){									//method for searching the BST
+				let current = this.root;
+				let found = false;							//initialize found to false 
+				while(current && !found){					//while there hasn't been a match it will make comparisons between given and current values
+					if(value < current.value){				//if the given value is less than current then it will search through left subtree
+						current = current.left;
+					}
+					else if(value > current.value){			//if the given value is greater than current then it will search through right subtree
+						current = current.right;
+					}
+					else{
+						found = current;					//if neither greater than nor equal to then it will compare with the current node value
+					}
+				}
+				if(!found){
+					return undefined;
+				}
+				return found;
+			}
+		}
+		// Uncomment this line to test your complete BST - make sure to pass a BST object created with the new keyword 
+		let bst = new BinarySearchTree();
+		testBst(bst);
+	</script>
+</body>
+</html>
