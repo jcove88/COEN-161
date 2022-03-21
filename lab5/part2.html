@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lab 4 - Part 2</title>
+	<style>
+		/* add any necessary styles here */
+		#resultDiv{display:none;}
+	</style>
+</head>
+<body>
+	<h1>Calculator</h1>
+	<label>Input #1 <input id="input1" type="text"></label>
+	<label>Input #2 <input id="input2" type="text"></label>
+	<input type="button" value="add">
+	<input type="button" value="subtract">
+	<input type="button" value="multiply">
+	<input type="button" value="divide"> 
+	<div id="resultDiv">Operator: <span id="operator"></span><br>Result:<span id="result"></span><br><input type="button" value="clear"></div>
+	<script>
+		// Your code goes here
+		document.querySelector('input[value="add"]').addEventListener("click", add);
+		document.querySelector('input[value="subtract"]').addEventListener("click", subtract);
+		document.querySelector('input[value="multiply"]').addEventListener("click", multiply);
+		document.querySelector('input[value="divide"]').addEventListener("click", divide);
+		document.querySelector('input[value="clear"]').addEventListener("click", clear);
+	
+		let input1 = document.getElementById("input1");
+		let input2 = document.getElementById("input2"); 
+		let operator = document.getElementById("operator");
+		let result = document.getElementById("result");
+
+		function add(){
+			operator.innerHTML = "Addition";
+			result.innerHTML = result.innerHTML = parseInt(input1.value) + parseInt(input2.value);
+			document.getElementById('resultDiv').style.display = "inline";
+		}
+		function subtract(){
+			operator.innerHTML = "Subtract";
+			result.innerHTML = parseInt(input1.value) - parseInt(input2.value);
+			document.getElementsByClassName('resultDiv').style.display = "inline";
+		}
+		function multiply(){
+			operator.innerHTML = "Multiply";
+			result.innerHTML = parseInt(input1.value) * parseInt(input2.value);
+			document.getElementsByClassName('resultDiv').style.display = "inline";
+		}
+		function divide(){
+			operator.innerHTML = "Divide";
+			result.innerHTML = Math.floor(parseInt(input1.value) / parseInt(input2.value));
+			document.getElementsByClassName('resultDiv').style.display = "inline";
+		}
+		function clear(){
+				document.getElementById("input1").value = "";
+				document.getElementById("input2").value = "";
+				document.getElementById("resultDiv").style.display = "none";
+		}
+	</script>
+</body>
+</html>
